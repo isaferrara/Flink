@@ -1,6 +1,14 @@
 README
 
-Hola, muchas gracias por la oportunidad. Pueden encontrar el deploy en la siguiente liga: 
+Para instalar:
+npm install
+
+Para correr:
+npm start 
+
+
+Hola, muchas gracias por la oportunidad. Pueden encontrar el deploy en la siguiente liga:
+ https://60280fa2ee3fd20009262c6b--flink.netlify.app/
 
 DESAFÍOS ENCONTRADOS
 Uno de los desafíos que me encontré fue con CORS y certificaciones SSL, cree una solución rápida para evitarlo. 
@@ -8,6 +16,8 @@ Se encuentra en src/pages/Login 58
 
 También obtuve un resultado diferente en diseño al deploy en Chrome. En dev los colores de fondo usados son diferentes
  y el font-weight es mayor. 
+
+ En el deploy la ruta privada me indica 404, en dev me manda a login. 
 
 
 RECOMENDACIONES
