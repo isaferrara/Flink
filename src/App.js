@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
 import Home from "./pages/Home";
 import Admin from "./pages/Admin"
-import SwitchTo from "./pages/SwitchTo"
 import Student from "./pages/Student"
 import NotFound from "./pages/NotFound"
 import CharProfile from "./pages/CharProfile";
@@ -26,7 +25,6 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/switch" component={SwitchTo} />
           <PrivateRoute exact path="/admin" component={Admin} />
           <PrivateRoute exact path="/student" component={Student} />
           <PrivateRoute exact path="/char/:name" component={CharProfile} />

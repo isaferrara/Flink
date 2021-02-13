@@ -59,7 +59,7 @@ const TextExtra = styled.h2`
 const Name = styled.h1`
     position: relative;
     left: 150px;
-    top: 130px;
+    top: 100px;
     font-size: 30px;
 `;
 
@@ -188,6 +188,7 @@ const CardProfile= styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  margin-bottom: 50px;
 `;
 
 
@@ -195,7 +196,7 @@ const CardProfileNameSearch= styled.div`
   border-radius: 20px;
   background-color: white;
   padding: 3%;
-  max-height: 70vh;
+  max-height: 80vh;
   box-shadow: 4px 8px 89px -12px rgba(118,118,118,0.22);
   margin: 5% 10% 10% 10%;
   display: flex;
@@ -212,11 +213,10 @@ const InfoColumn= styled.div`
 `;
 
 const ExtraInfos= styled.div`
-  left: 20px;
   display: flex;
-  position:relative;
-  left: 130px;
-  bottom: 130px;
+  position:absolute;
+  left: 660px;
+  bottom: 120px;
   flex-direction: row;
   align-items: center;
 `;

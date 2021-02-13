@@ -55,7 +55,7 @@ function Login() {
         setIsError(true);
       }
     }).catch(e => {
-      console.log('ver código src/pages/login 58 para ver solución temporal a net::ERR_SSL_PROTOCOL_ERROR')
+      console.log('ver código src/pages/login 58 la solución temporal al error net::ERR_SSL_PROTOCOL_ERROR')
       // El API funciona, hace el login correctamente  y redirige al usuario a la página que le corresponde 
       // sin embargo me encontré con un problem de CORS en Safari (que es necesario solucionar en el backend) y un ERR_SSL_PROTOCOL_ERROR en chrome  .
       //el código de abajo solo es un a solución rápida y temporal para hacer el login, pero el de arriba sí es funcional
