@@ -55,9 +55,9 @@ function Login() {
         setIsError(true);
       }
     }).catch(e => {
-      console.log('ver código en src/pages/Login 46 para ver solución temporal a CORS ')
-      // El API funciona, hace el login correctamente  y redirige al usuario a la página que le corresponde en Chrome o firefox
-      // sin embargo me encontré con un problem de CORS en Safari que es necesario solucionar en el backend.
+      console.log('ver código src/pages/login 58 para ver solución temporal a net::ERR_SSL_PROTOCOL_ERROR')
+      // El API funciona, hace el login correctamente  y redirige al usuario a la página que le corresponde 
+      // sin embargo me encontré con un problem de CORS en Safari (que es necesario solucionar en el backend) y un ERR_SSL_PROTOCOL_ERROR en chrome  .
       //el código de abajo solo es un a solución rápida y temporal para hacer el login, pero el de arriba sí es funcional
       if(user === 'snape@hogwarts.com' && password==='snape0109'){
         setAuthTokens({
