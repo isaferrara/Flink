@@ -18,24 +18,35 @@ import {
     Button
 } from 'antd'
 
+
+//Componente con información detallada de el personaje seleccionado
+
 const CharProfile = (props) => {
     const name= props.match.params.name
     const [form] = Form.useForm()
     const [charactersHP, setCharacters] = useState([]);
     const [extras, setExtra] = useState([]);
 
+    // Usamos useEffect para ejecutar la funcion llama a nuestros
+    // personajes cuando se renderiza nuestro componente 
+    // el [] es para indicar que solo se ejecuta una vez
     useEffect(() => {  
       getChar()
         .then((characters) =>setCharacters(characters))
         .catch((error) => console.error(error));
     }, []);
     
+    
+    // filtramos los personajes para solo mostrar al que recibimos en los props 
     const student= charactersHP.filter(char=> char.name===name)
 
-
     function submitForm (e){
+        // e.extra es el valor que nos manda el formulario Ej. 'gender'
         const info=e.extra
-        //upercase first letter 
+
+        //info=== 'gender'
+        //HarryPotter[info]==='male'
+        //Si es de tipo string, capitalizamos la primera letra ('Male'), sino solo mostramos la información (1970) 
         typeof(student[0][info])==='string'? setExtra(student[0][info].charAt(0).toUpperCase()+student[0][info].slice(1))
         : setExtra(student[0][info])
     }
@@ -46,14 +57,16 @@ const CharProfile = (props) => {
             <NavBar/>
           {student.map((character) => (
                 <div key={character.name}>
-                        <CardProfileNameSearch>                
+                <CardProfileNameSearch>                
                             <Name> {character.name}</Name>
+                    
                     <CardProfile >
-
                         <div style={{textAlign:'center'}}>
                             <ImgCharProfile src={character.image} alt={character.name}/>
                         </div>
                         <InfoRow>
+
+                        {/* presentar información de nuestro personaje */}
                         <DivSpace>
                             <h3> General information</h3>
                             <p><b>House:</b> {character.house? character.house: 'Not available'  }</p>
@@ -69,6 +82,7 @@ const CharProfile = (props) => {
 
                         </DivSpace>
                         </InfoRow>
+                            {/* Cambiamos la imagen para demostrar si está vivo o muerto */}
                         {character.alive===true? 
                         <InfoColumn>
                         <h1>Alive</h1>
@@ -78,10 +92,10 @@ const CharProfile = (props) => {
                         <h1>Dead</h1>
                         <Status src={'https://i.pinimg.com/originals/9b/fb/f4/9bfbf45b1cb45e67d3e660de982ea9c0.png'}/>
                         </InfoColumn>
-                        }
-                    
-                        
+                        }                       
                     </CardProfile>
+
+                    {/* buscador de información extra */}
                     <ExtraInfos>
                     <Form form={form} layout="vertical" onFinish={submitForm } style={{width:'40vh'}}>
                     <Form.Item name="extra" label="Extra info">                            
@@ -93,15 +107,15 @@ const CharProfile = (props) => {
                                 <Select.Option value="hairColour">Hair Colour</Select.Option>
                                 <Select.Option value="actor">Actor</Select.Option>
                                 </Select>
-                     </Form.Item>
+                    </Form.Item>
                         <Button type="primary" block htmlType="submit">
                             Search
                         </Button>
-                     </Form>
+                    </Form>
                     
-                     <TextExtra>{extras}</TextExtra>
+                    <TextExtra>{extras}</TextExtra>
                     </ExtraInfos>   
-                        </CardProfileNameSearch>
+                </CardProfileNameSearch>
 
                 </div>
             ))}

@@ -2,16 +2,21 @@ import React, { useEffect, useState } from 'react';
 import getChar from '../services/getChar'
 import {Wrap, CardChar, CardInfo, InfoColumn, ImgHouse, ImgChar, LinkChar} from './AuthForms'
 
+//Componente con información general de personajes si pertenecen a Ravenclaw
+
 
 const Ravenclaw = () => {
     const [charactersHP, setCharacters] = useState([]);
 
+     // Usamos useEffect para ejecutar la funcion llama a nuestros
+    // personajes cuando se renderiza nuestro componente
     useEffect(() => {  
       getChar()
         .then((characters) =>setCharacters(characters))
         .catch((error) => console.error(error));
     }, []); 
 
+    // filtramos los personajes para solo mostrar al que son estudiantes de Ravenclaw
     const ravenclawStudents= charactersHP.filter(char=> char.house==='Ravenclaw' && char.hogwartsStudent===true)
 
 

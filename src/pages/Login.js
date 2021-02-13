@@ -5,14 +5,23 @@ import { Card, Logo, Form, Input, Button, Error, HPLogin, ButtonHarry, ButtonSna
 import { useAuth } from "../context/auth";
 import { Divider } from "antd";
 
-function Login(props) {
+function Login() {
+  //Hooks 
+  //Para darle los permiso al usuario para hacer login según sus credenciales (staff/admin o estudiante)
   const [isLoggedInAdmin, setLoggedInAdmin] = useState(false);
   const [isLoggedInStud, setLoggedInStud] = useState(false);
+
+  // para crear un error si la información es incorrecta o nula
   const [isError, setIsError] = useState(false);
+
+  // Para guardar la información del usuario 
   const [user, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+    // Para guardar la información que llega de la API (name, house, staff)
   const { setAuthTokens } = useAuth();
 
+  
   let axiosConfig = {
     headers: {
       'Access-Control-Allow-Origin': 'http://localhost:3001',
@@ -26,6 +35,7 @@ function Login(props) {
     password: password
   }
 
+  //Mandar información a la API para hacer el Login y recibir los datos de nuestro usuario
   function postLogin() {
     axios({url:'http://ec2-52-37-61-68.us-west-2.compute.amazonaws.com:1234/api/v1/challenge/login', 
     method: 'POST', 
@@ -67,20 +77,21 @@ function Login(props) {
     });
   }
 
-function loginHarry(){
-  setLoggedInStud(true)
-  setAuthTokens({ name: "Harry Potter", house: "Gryffindor", staff: false})
-}
-function loginSnape(){
-  setLoggedInAdmin(true)
-  setAuthTokens({ name: "Severus Snape", house: "Slytherin", staff: true})
-}
+  // funciones para hacer login rápido con imágenes de harry y snape
+    function loginHarry(){
+      setLoggedInStud(true)
+      setAuthTokens({ name: "Harry Potter", house: "Gryffindor", staff: false})
+    }
+    function loginSnape(){
+      setLoggedInAdmin(true)
+      setAuthTokens({ name: "Severus Snape", house: "Slytherin", staff: true})
+    }
 
-  if (isLoggedInAdmin){
-    return <Redirect to='/admin'/>
-  }else if (isLoggedInStud){
-    return <Redirect to='/student'/>
-  }
+    if (isLoggedInAdmin){
+      return <Redirect to='/admin'/>
+    }else if (isLoggedInStud){
+      return <Redirect to='/student'/>
+    }
 
 
   return (

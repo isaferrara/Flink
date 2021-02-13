@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link} from 'react-router-dom'
 
+//estilos de componentes
 
 const Card = styled.div`
   box-sizing: border-box;

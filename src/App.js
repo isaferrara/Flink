@@ -9,15 +9,17 @@ import CharProfile from "./pages/CharProfile";
 import { AuthContext } from "./context/auth";
 import Login from "./pages/Login";
 
-function App(props) {
+function App() {
   const [authTokens, setAuthTokens] = useState();
   
+  //Add out key name and value to localStorage
   const setTokens = (data) => {
     localStorage.setItem("tokens", JSON.stringify(data));
     setAuthTokens(data);
   }
 
   return (
+    //we send the state of our tokens through the context.provider
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
         <Switch>
