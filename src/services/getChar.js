@@ -6,7 +6,13 @@
 // wand {wood, core, length}, patronus, hogwartsStudent, 
 //hogwartsStaff, actor, alive, image
 export default function getCharacters() {
-    return fetch('http://hp-api.herokuapp.com/api/characters').then((res) =>
+  var myHeaders = new Headers({
+    'Content-Type': 'text/plain',
+    'X-Custom-Header': 'hello world'
+  });
+    return fetch('http://hp-api.herokuapp.com/api/characters',{
+      headers: myHeaders
+    }).then((res) =>
       res.json()
     );
   }

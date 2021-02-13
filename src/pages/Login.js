@@ -25,7 +25,7 @@ function Login() {
   
   let axiosConfig = {
     headers: {
-      'Access-Control-Allow-Origin': 'http://localhost:3001',
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': "application/json, text/plain",
       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
     }
