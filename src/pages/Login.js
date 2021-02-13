@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Card, Logo, Form, Input, Button, Error, HPLogin, ButtonHarry, ButtonSnape, InfoRow} from "../components/AuthForms";
 import { useAuth } from "../context/auth";
 import { Divider } from "antd";
+import NavBar from "../components/NavBar";
 
 function Login() {
   //Hooks 
@@ -19,7 +20,7 @@ function Login() {
   const [password, setPassword] = useState("");
 
     // Para guardar la información que llega de la API (name, house, staff)
-  const { setAuthTokens } = useAuth();
+  const { authTokens, setAuthTokens } = useAuth();
 
   
   let axiosConfig = {
@@ -53,9 +54,9 @@ function Login() {
       }
     }).catch(e => {
       console.log('ver código en src/pages/Login 46 para ver solución temporal a CORS ')
-      // El API funciona, hace el login correctamente (hice las pruebas con CORS desactivado) y redirige al usuario a la página que le corresponde
+      // El API funciona, hace el login correctamente  y redirige al usuario a la página que le corresponde (hice pruebas con CORS desactivado)
       // sin embargo me encontré con un problem de CORS que es necesario solucionar en el backend.
-      //el código de abajo solo es un a solución rápida y temporal para hacer el login
+      //el código de abajo solo es un a solución rápida y temporal para hacer el login, pero el de arriba sí es funcional
       if(user === 'snape@hogwarts.com' && password==='snape0109'){
         setAuthTokens({
           name: "Severus Snape",
@@ -95,6 +96,8 @@ function Login() {
 
 
   return (
+    <>
+    <NavBar/>
     <HPLogin>
     <Card>
       <Logo src={'https://i.pinimg.com/originals/1e/39/03/1e390396d7381a36a73407df5cc02fb1.png'} />
@@ -116,7 +119,14 @@ function Login() {
           }}
           placeholder="password"
         />
-        <Button onClick={postLogin}>Login</Button>
+
+        {/* si no hay usuario en sesión, hace login, sino manda a directorio */}
+        { !authTokens? 
+        <Button onClick={postLogin}>Login</Button>: 
+        authTokens.staff===true?  
+        (<Redirect to={"/admin"}/>):  
+        (<Redirect to={"/student"}/>)}
+
       </Form>
         { isError &&<Error>The username or password provided are incorrect!</Error> }
         <Divider>or</Divider>
@@ -125,8 +135,8 @@ function Login() {
           <ButtonSnape onClick={loginSnape}/>
         </InfoRow>
     </Card>
-
     </HPLogin>
+    </>
   );
 }
 

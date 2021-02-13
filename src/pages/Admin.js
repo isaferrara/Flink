@@ -15,12 +15,11 @@ function Admin() {
 
   //authTokens contain name,house and if they're staff
   const {authTokens } = useAuth();
-  
+
   return (
     <CardChar>
     <NavBar/>
-        <Title>
-        
+        <Title>      
         {/* si de authTokens.staff===true es que es profesor, sino es estudiante */}
       {authTokens.staff===true? <h3> Staff's Page</h3>: <h1> Student's Page</h1>}
             <h1 style={{marginTop: '30px'}}>WELCOME {authTokens.name.toUpperCase()}</h1>

@@ -11,7 +11,7 @@ const Card = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: #F0F0F0;
-  margin: 10vh auto;
+  margin: 3vh auto 0 auto;
   background: rgba( 255, 255, 255, 0.35 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur( 6.0px );

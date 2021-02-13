@@ -6,7 +6,7 @@ const { Header} = Layout;
 
 
 const NavBar = () => {
-    const { setAuthTokens, authTokens } = useAuth();
+    const { authTokens, setAuthTokens} = useAuth();
 
     function logOut() {
         setAuthTokens();
@@ -21,17 +21,34 @@ const NavBar = () => {
                 Home
                 </Link>
             </Menu.Item>
-            {!authTokens ? <>       
-            <div style={{border:'1px solid white'}}>
-                <Menu.Item key="2">
-                <Link to="/login">
+            {/* si eres staff, te dirige a admin, sino a student */}
+            {!authTokens? 
+                <>       
+                <Menu.Item key="3" onClick={logOut}>
+                    <Link to="/login"  >
                     Login
+                    </Link>
+                </Menu.Item>
+            </> :
+            authTokens.staff===true ? <>       
+                <Menu.Item key="2">
+                <Link to="/admin">
+                    Directory
                 </Link>
                 </Menu.Item>
-            </div>
+                <Menu.Item key="3" onClick={logOut}>
+                    <Link to="/login"  >
+                    Logout
+                    </Link>
+                </Menu.Item>
             </> : <>
-                <Menu.Item key="3" onClick={logOut} style={{ borderTop:'1px solid gray'}}>
-                    <Link to="/"  >
+                <Menu.Item key="4" >
+                    <Link to="/student"  >
+                    Directory
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="5" onClick={logOut}>
+                    <Link to="/login"  >
                     Logout
                     </Link>
                 </Menu.Item>

@@ -14,7 +14,6 @@ import { useAuth } from "./context/auth";
   }
   */
 function PrivateRoute( { component: Component, ...rest }) {
-  console.log(rest)
   const { authTokens } = useAuth();
 
   return (
@@ -22,7 +21,8 @@ function PrivateRoute( { component: Component, ...rest }) {
       {...rest}
       //si hay usuario render el componente, sino mandarlo a login
       render=
-      {props => authTokens ? ( <Component {...props} />
+      {props => authTokens ? 
+        (<Component {...props} />
         ) : (
         <Redirect to={"/login"}/>
         )
