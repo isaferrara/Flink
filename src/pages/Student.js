@@ -24,7 +24,7 @@ export const Student = () => {
                 <h1 style={{marginTop: '30px'}}>WELCOME <br/><b>{authTokens.name.toUpperCase()}</b>!</h1>
                 <h4 style={{ width: '700px'}}>You can only access the students' information, everything else is in the Forbidden Section.
                 <br/>
-                To logout say "mischief managed" (if you are a Muggle you could just Logout).</h4>
+                To logout say "mischief managed" (or you could just Logout).</h4>
             </Title>
             <Divider>Students</Divider>
                 <Gryffindor/>
