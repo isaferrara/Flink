@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import axios from 'axios';
 import { Card, Logo, Form, Input, Button, Error, HPLogin, ButtonHarry, ButtonSnape, InfoRow} from "../components/AuthForms";
 import { useAuth } from "../context/auth";
 import { Divider } from "antd";
@@ -22,14 +21,16 @@ function Login() {
     // Para guardar la información que llega de la API (name, house, staff)
   const { authTokens, setAuthTokens } = useAuth();
 
+
+
+  var myHeaders = new Headers({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Expose-Headers': '*',
+    'Access-Control-Allow-Credentials': 'true',
+    'Content-Type': "application/json, text/plain",
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+  });
   
-  let axiosConfig = {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': "application/json, text/plain",
-      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
-    }
-  };
 
   const info ={
     user:user,
@@ -38,10 +39,11 @@ function Login() {
 
   //Mandar información a la API para hacer el Login y recibir los datos de nuestro usuario
   function postLogin() {
-    axios({url:'http://ec2-52-37-61-68.us-west-2.compute.amazonaws.com:1234/api/v1/challenge/login', 
+    fetch('https://ec2-52-37-61-68.us-west-2.compute.amazonaws.com:1234/api/v1/challenge/login', 
+  {
     method: 'POST', 
-    data: info,
-    axiosConfig
+    body: info,
+    headers: myHeaders
   }).then(result => {
       if ( result.status===200 && result.data.staff===true) {
         setAuthTokens(result.data);
@@ -54,8 +56,8 @@ function Login() {
       }
     }).catch(e => {
       console.log('ver código en src/pages/Login 46 para ver solución temporal a CORS ')
-      // El API funciona, hace el login correctamente  y redirige al usuario a la página que le corresponde (hice pruebas con CORS desactivado)
-      // sin embargo me encontré con un problem de CORS que es necesario solucionar en el backend.
+      // El API funciona, hace el login correctamente  y redirige al usuario a la página que le corresponde en Chrome o firefox
+      // sin embargo me encontré con un problem de CORS en Safari que es necesario solucionar en el backend.
       //el código de abajo solo es un a solución rápida y temporal para hacer el login, pero el de arriba sí es funcional
       if(user === 'snape@hogwarts.com' && password==='snape0109'){
         setAuthTokens({
